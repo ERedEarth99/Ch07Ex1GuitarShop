@@ -31,7 +31,7 @@ namespace GuitarShop.Controllers
                     .OrderBy(p => p.ProductID).ToList();
             }
 
-            // New condition for handling the "Strings" category
+            // New condition for handling the "Strings" category step 10
             else if (id == "Strings") 
             {
                 product = context.Products
@@ -48,7 +48,7 @@ namespace GuitarShop.Controllers
             // Use ViewBag to pass data to the view
             ViewBag.Categories = categories;
 
-            // Modify ViewBag.SelectedCategoryName to handle "Strings"
+            // Modify ViewBag.SelectedCategoryName to handle "Strings" step 11
             ViewBag.SelectedCategoryName = id;
 
             if (id == "Strings")
