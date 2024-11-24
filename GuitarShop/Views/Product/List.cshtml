@@ -17,13 +17,21 @@
             @foreach (Category c in ViewBag.Categories)
             {
                 <li class="list-group-item">
-                    <a asp-controller="Product" asp-action="List" asp-route-id="@c.Name" 
+                    <a asp-controller="Product" asp-action="List" asp-route-id="@c.Name"
                        class="list-group-item
-                             @(ViewBag.SelectedCategoryName == c.Name ? "active" : "")">
+                 @(ViewBag.SelectedCategoryName == c.Name ? "active" : "")">
                         @c.Name
                     </a>
                 </li>
             }
+            @* Step 15 & 16: Add a static link for the "Strings" category right after the modified foreach loop that now displays stringed instruments. *@
+            <li class="list-group-item">
+                <a asp-controller="Product" asp-action="List" asp-route-id="Strings"
+                   class="list-group-item
+             @(ViewBag.SelectedCategoryName == "Strings" ? "active" : "")">
+                    Strings
+                </a>
+            </li>
         </ul>
     </div>
 
