@@ -17,11 +17,13 @@ namespace GuitarShop.Models
         {
             base.OnModelCreating(modelBuilder);
 
+            // Adds a new category Banjos step 19
             modelBuilder.Entity<Category>().HasData(
-                new Category { CategoryID = 1, Name = "Guitars" },
-                new Category { CategoryID = 2, Name = "Basses" },
-                new Category { CategoryID = 3, Name = "Drums" }
-            );
+         new Category { CategoryID = 1, Name = "Guitars", IsStringedInstrument = true },
+         new Category { CategoryID = 2, Name = "Basses", IsStringedInstrument = true },
+         new Category { CategoryID = 3, Name = "Drums", IsStringedInstrument = false },
+         new Category { CategoryID = 4, Name = "Banjos", IsStringedInstrument = true }
+         );
 
             modelBuilder.Entity<Product>().HasData(
                 new Product

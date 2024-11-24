@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using GuitarShop.Models;
+using System;
 
 namespace GuitarShop.Controllers
 {
@@ -18,6 +19,7 @@ namespace GuitarShop.Controllers
         {
             return RedirectToAction("List", "Product");
         }
+
         [Route("[controller]s/{id?}")]
         public IActionResult List(string id = "All")
         {
@@ -25,19 +27,24 @@ namespace GuitarShop.Controllers
                 .OrderBy(c => c.CategoryID).ToList();
 
             List<Product> product;
+
+            // New condition for handling the "Strings" category step 10
             if (id == "All")
             {
                 product = context.Products
                     .OrderBy(p => p.ProductID).ToList();
             }
-
-            // New condition for handling the "Strings" category step 10
-            else if (id == "Strings") 
+            else if (id == "Strings")
             {
+                // Debugging: Log when "Strings" condition is hit
+                Console.WriteLine("Fetching stringed instruments...");
+
                 product = context.Products
-                    .Where(p => p.Category.Name == "Guitars" || p.Category.Name == "Basses")
-                    .OrderBy(p => p.ProductID).ToList();
+                    .Where(p => p.Category.IsStringedInstrument) 
+                    .OrderBy(p => p.ProductID)
+                    .ToList();
             }
+            // Handle other categories dynamically by matching category names
             else
             {
                 product = context.Products
@@ -59,8 +66,5 @@ namespace GuitarShop.Controllers
             // Bind products to view
             return View(product);
         }
-
-
-
     }
 }
