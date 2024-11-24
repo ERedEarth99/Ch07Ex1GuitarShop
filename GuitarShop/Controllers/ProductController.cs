@@ -47,7 +47,14 @@ namespace GuitarShop.Controllers
 
             // Use ViewBag to pass data to the view
             ViewBag.Categories = categories;
+
+            // Modify ViewBag.SelectedCategoryName to handle "Strings"
             ViewBag.SelectedCategoryName = id;
+
+            if (id == "Strings")
+            {
+                ViewBag.SelectedCategoryName = "Strings";
+            }
 
             // Bind products to view
             return View(product);
