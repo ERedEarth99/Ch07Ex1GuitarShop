@@ -5,7 +5,7 @@ namespace GuitarShop.Models
 {
     public class Product
     {
-        // EF will instruct the database to automatically generate this values
+        // EF will instruct the database to automatically generate this value
         public int ProductID { get; set; }
 
         [Required(ErrorMessage = "Please select a category.")]
