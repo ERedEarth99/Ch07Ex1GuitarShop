@@ -18,49 +18,42 @@ namespace GuitarShop.Controllers
         {
             return RedirectToAction("List", "Product");
         }
-
         [Route("[controller]s/{id?}")]
         public IActionResult List(string id = "All")
         {
             var categories = context.Categories
                 .OrderBy(c => c.CategoryID).ToList();
 
-            List<Product> products;
+            List<Product> product;
             if (id == "All")
             {
-                products = context.Products
+                product = context.Products
+                    .OrderBy(p => p.ProductID).ToList();
+            }
+
+            // New condition for handling the "Strings" category
+            else if (id == "Strings") 
+            {
+                product = context.Products
+                    .Where(p => p.Category.Name == "Guitars" || p.Category.Name == "Basses")
                     .OrderBy(p => p.ProductID).ToList();
             }
             else
             {
-                products = context.Products
+                product = context.Products
                     .Where(p => p.Category.Name == id)
                     .OrderBy(p => p.ProductID).ToList();
             }
 
-            // use ViewBag to pass data to view
+            // Use ViewBag to pass data to the view
             ViewBag.Categories = categories;
             ViewBag.SelectedCategoryName = id;
 
-            // bind products to view
-            return View(products);
-        }
-
-        public IActionResult Details(int id)
-        {
-            var categories = context.Categories
-                .OrderBy(c => c.CategoryID).ToList();
-
-            Product product = context.Products.Find(id);
-
-            string imageFilename = product.Code + "_m.png";
-
-            // use ViewBag to pass data to view
-            ViewBag.Categories = categories;
-            ViewBag.ImageFilename = imageFilename;
-
-            // bind product to view
+            // Bind products to view
             return View(product);
         }
+
+
+
     }
 }
