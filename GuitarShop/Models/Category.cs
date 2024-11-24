@@ -10,7 +10,5 @@ namespace GuitarShop.Models
         public string Name { get; set; }
         // A new property to identify stringed instruments
         public bool IsStringedInstrument { get; set; }
-
-
     }
 }
